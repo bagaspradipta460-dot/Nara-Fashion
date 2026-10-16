@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NARA FASHION | Busana Wanita Elegan & Modern Hijab</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Luxury Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nara: {
+                            cream: '#FBF9F5',
+                            beige: '#F4EFEA',
+                            sand: '#E8E1D7',
+                            gold: '#C5A059',
+                            darkGold: '#A37F3B',
+                            charcoal: '#1A1A1A',
+                            gray: '#666666',
+                            lightGray: '#E5E5E5'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    tracking: {
+                        widest: '.25em',
+                        superwide: '.35em',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FBF9F5;
+            color: #1A1A1A;
+            overflow-x: hidden;
+        }
+        .font-serif-luxury {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .smooth-transition {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .drawer-overlay {
+            background-color: rgba(26, 26, 26, 0.4);
+            backdrop-filter: blur(4px);
+        }
+        .zoom-img-container {
+            overflow: hidden;
+        }
+        .zoom-img-container img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .zoom-img-container:hover img {
+            transform: scale(1.06);
+        }
+        .gold-underline {
+            position: relative;
+        }
+        .gold-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C5A059;
+            transition: width 0.3s ease-in-out;
+        }
+        .gold-underline:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-nara-sand selection:text-nara-charcoal">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-20 z-50 transform translate-y-20 opacity-0 transition-all duration-500 bg-nara-charcoal text-white px-6 py-4 rounded-none shadow-2xl flex items-center gap-4 border-l-2 border-nara-gold">
+        <i id="toast-icon" class="fa-solid fa-check text-nara-gold"></i>
+        <span id="toast-message" class="text-xs uppercase tracking-widest font-medium">Produk berhasil ditambahkan</span>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20tertarik%20dengan%20koleksi%20produk%20Anda." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 z-50 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
+       title="Chat Customer Service via WhatsApp">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-in-out text-xs font-medium pl-0 group-hover:pl-2">
+            Konsultasi WhatsApp
+        </span>
+    </a>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-nara-charcoal text-nara-cream text-[11px] uppercase tracking-superwide py-2.5 px-4 text-center font-light border-b border-nara-gold/20 flex justify-between items-center px-4 md:px-8">
+        <span class="hidden md:inline-block text-nara-gold">EKSKLUSIVITAS &amp; ELEGANSI</span>
+        <p class="mx-auto">Gratis Pengiriman Seluruh Indonesia | Kode Voucher: <span class="text-nara-gold font-normal">NARA10</span></p>
+        <div class="hidden md:flex gap-4 text-[10px] items-center">
+            <span class="text-nara-sand"><i class="fa-brands fa-whatsapp text-emerald-400 mr-1"></i> +62 838-4085-2186</span>
+            <select id="currency-select" class="bg-transparent border-none text-nara-cream focus:outline-none cursor-pointer hover:text-nara-gold">
+                <option value="IDR" class="bg-nara-charcoal text-white">IDR (Rp)</option>
+                <option value="USD" class="bg-nara-charcoal text-white">USD ($)</option>
+                <option value="EUR" class="bg-nara-charcoal text-white">EUR (€)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-40 bg-nara-cream/95 backdrop-blur-md border-b border-nara-sand/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
+            
+            <!-- Mobile Menu Trigger -->
+            <button class="lg:hidden text-xl text-nara-charcoal focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Navigation Links Left -->
+            <nav class="hidden lg:flex items-center space-x-8 text-xs tracking-widest uppercase font-medium">
+                <a href="#catalog" onclick="filterCategory('all')" class="hover:text-nara-gold gold-underline py-1 transition-colors">Koleksi Terbaru</a>
+                <a href="#catalog" onclick="filterCategory('hijab')" class="hover:text-nara-gold gold-underline py-1 transition-colors text-nara-gold font-semibold">Hijab &amp; Modest</a>
+                <a href="#catalog" onclick="filterCategory('dresses')" class="hover:text-nara-gold gold-underline py-1 transition-colors">Gaun &amp; Dress</a>
+            </nav>
+
+            <!-- Brand Logo Center -->
+            <a href="#" class="flex flex-col items-center group">
+                <div class="relative flex items-center justify-center mb-0.5">
+                    <svg class="w-8 h-6 text-nara-charcoal group-hover:text-nara-gold transition-colors" viewBox="0 0 100 60" fill="currentColor">
+                        <path d="M 15 45 C 20 15, 60 10, 85 20" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                        <text x="50" y="42" font-family="'Cormorant Garamond', serif" font-size="34" font-weight="600" text-anchor="middle">N</text>
+                    </svg>
+                </div>
+                <span class="font-serif-luxury text-2xl lg:text-3xl tracking-widest font-normal text-nara-charcoal group-hover:text-nara-gold transition-colors uppercase leading-none">NARA</span>
+                <span class="text-[9px] tracking-superwide uppercase text-nara-gray font-light mt-0.5">FASHION</span>
+            </a>
+
+            <!-- Navigation Links Right -->
+            <nav class="hidden lg:flex items-center space-x-8 text-xs tracking-widest uppercase font-medium">
+                <a href="#catalog" onclick="filterCategory('tailored')" class="hover:text-nara-gold gold-underline py-1 transition-colors">Tailored Suits</a>
+                <a href="#about" class="hover:text-nara-gold gold-underline py-1 transition-colors">Tentang Kami</a>
+                <a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20tertarik%20dengan%20koleksi%20produk%20Anda." target="_blank" class="hover:text-nara-gold gold-underline py-1 transition-colors text-emerald-700">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Kontak WA
+                </a>
+            </nav>
+
+            <!-- Right Actions Icons -->
+            <div class="flex items-center space-x-6 text-nara-charcoal">
+                <!-- Search Toggle -->
+                <button onclick="toggleSearchModal()" class="hover:text-nara-gold transition-colors p-1" title="Cari Produk">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                </button>
+
+                <!-- Wishlist Icon -->
+                <button onclick="openWishlistDrawer()" class="relative hover:text-nara-gold transition-colors p-1" title="Favorit">
+                    <i class="fa-regular fa-heart text-sm"></i>
+                    <span id="wishlist-count" class="absolute -top-1.5 -right-2 bg-nara-gold text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center opacity-0 scale-75 transition-all">0</span>
+                </button>
+
+                <!-- Shopping Bag Icon -->
+                <button onclick="toggleCartDrawer()" class="relative hover:text-nara-gold transition-colors p-1" title="Keranjang Belanja">
+                    <i class="fa-solid fa-bag-shopping text-base"></i>
+                    <span id="cart-count" class="absolute -top-1.5 -right-2 bg-nara-charcoal text-nara-cream text-[9px] font-semibold w-4 h-4 rounded-full flex items-center justify-center border border-nara-cream">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 bg-nara-cream/98 flex flex-col justify-start pt-28 px-6 hidden opacity-0 transition-opacity duration-300">
+        <button onclick="toggleSearchModal()" class="absolute top-8 right-12 text-2xl text-nara-charcoal hover:text-nara-gold">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-3xl mx-auto w-full">
+            <h3 class="font-serif-luxury text-3xl text-center mb-8 italic">Cari Koleksi NARA FASHION</h3>
+            <div class="relative border-b-2 border-nara-charcoal pb-2">
+                <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="Cari hijab, abaya, dress, blazer..." class="w-full bg-transparent text-xl font-serif-luxury placeholder-nara-gray/60 focus:outline-none pr-10">
+                <i class="fa-solid fa-magnifying-glass absolute right-2 top-3 text-nara-charcoal"></i>
+            </div>
+            <div id="search-results" class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6 max-h-[50vh] overflow-y-auto no-scrollbar"></div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-nara-cream translate-x-full transition-transform duration-500 ease-in-out lg:hidden flex flex-col p-8">
+        <div class="flex justify-between items-center mb-8">
+            <span class="font-serif-luxury text-2xl tracking-widest uppercase">NARA FASHION</span>
+            <button onclick="toggleMobileMenu()" class="text-2xl text-nara-charcoal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-5 text-sm tracking-widest uppercase font-medium">
+            <a href="#catalog" onclick="filterCategory('all'); toggleMobileMenu();" class="py-2 border-b border-nara-sand">Koleksi Terbaru</a>
+            <a href="#catalog" onclick="filterCategory('hijab'); toggleMobileMenu();" class="py-2 border-b border-nara-sand text-nara-gold">Hijab &amp; Modest Wear</a>
+            <a href="#catalog" onclick="filterCategory('dresses'); toggleMobileMenu();" class="py-2 border-b border-nara-sand">Gaun &amp; Dress</a>
+            <a href="#catalog" onclick="filterCategory('tailored'); toggleMobileMenu();" class="py-2 border-b border-nara-sand">Tailored Suits</a>
+            <a href="#about" onclick="toggleMobileMenu();" class="py-2 border-b border-nara-sand">Tentang Kami</a>
+            <a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20tertarik%20dengan%20koleksi%20produk%20Anda." target="_blank" class="py-3 bg-emerald-600 text-white text-center mt-4 rounded-none flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Hubungi WhatsApp
+            </a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative bg-nara-beige overflow-hidden">
+        <div class="max-w-7xl mx-auto min-h-[82vh] flex flex-col lg:flex-row items-center">
+            
+            <!-- Text Content Left -->
+            <div class="w-full lg:w-5/12 px-8 lg:px-12 py-16 lg:py-0 z-10 flex flex-col justify-center items-start">
+                <span class="text-xs uppercase tracking-superwide text-nara-gold font-medium mb-3">KOLEKSI EKSKLUSIF 2026</span>
+                <h1 class="font-serif-luxury text-4xl lg:text-6xl font-normal leading-tight text-nara-charcoal mb-6">
+                    Keanggunan Modern, <br><span class="italic font-light">Elegansi Tanpa Batas.</span>
+                </h1>
+                <p class="text-nara-gray text-xs md:text-sm font-light leading-relaxed mb-8 max-w-md">
+                    Dirancang khusus untuk wanita Indonesia modern. Menghadirkan busana premium, koleksi Hijab &amp; Modest wear berbahan sutra, voal eksklusif, dan linen terbaik.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a href="#catalog" class="bg-nara-charcoal text-nara-cream hover:bg-nara-gold transition-colors duration-300 text-xs tracking-widest uppercase px-8 py-4 font-medium text-center">
+                        Lihat Katalog
+                    </a>
+                    <a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20ingin%20bertanya%20tentang%20koleksi%20terbaru." target="_blank" class="border border-emerald-700 text-emerald-800 hover:bg-emerald-700 hover:text-white transition-colors duration-300 text-xs tracking-widest uppercase px-6 py-4 font-medium text-center flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Tanya CS WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image Right -->
+            <div class="w-full lg:w-7/12 h-[55vh] lg:h-[82vh] relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-nara-beige via-transparent to-transparent z-10 hidden lg:block"></div>
+                <img src="https://images.unsplash.com/photo-1584589167171-541ce45f1eea?q=80&w=1600&auto=format&fit=crop" 
+                     alt="NARA Fashion Indonesia Modest Hijab Collection" 
+                     class="w-full h-full object-cover object-top">
+                <div class="absolute bottom-8 right-8 z-20 bg-nara-cream/90 backdrop-blur-md p-4 hidden md:block border border-nara-sand">
+                    <p class="text-[10px] uppercase tracking-widest text-nara-gray">Sorotan Utama</p>
+                    <p class="font-serif-luxury text-base text-nara-charcoal">Silk Abaya &amp; Premium Scarf Series</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Philosophy Bar -->
+    <section class="border-y border-nara-sand bg-nara-cream py-8 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-2">
+                <i class="fa-solid fa-gem text-nara-gold text-lg mb-2"></i>
+                <h4 class="text-xs uppercase tracking-widest font-semibold mb-1">Kualitas Premium</h4>
+                <p class="text-[11px] text-nara-gray font-light">Bahan sutra &amp; voal impor terbaik</p>
+            </div>
+            <div class="p-2">
+                <i class="fa-solid fa-wand-magic-sparkles text-nara-gold text-lg mb-2"></i>
+                <h4 class="text-xs uppercase tracking-widest font-semibold mb-1">Modest &amp; Syar'i Chic</h4>
+                <p class="text-[11px] text-nara-gray font-light">Desain santun yang tetap berkelas</p>
+            </div>
+            <div class="p-2">
+                <i class="fa-solid fa-truck-fast text-nara-gold text-lg mb-2"></i>
+                <h4 class="text-xs uppercase tracking-widest font-semibold mb-1">Pengiriman Cepat</h4>
+                <p class="text-[11px] text-nara-gray font-light">Layanan kurir ekspres ke seluruh wilayah</p>
+            </div>
+            <div class="p-2">
+                <i class="fa-brands fa-whatsapp text-emerald-600 text-xl mb-2"></i>
+                <h4 class="text-xs uppercase tracking-widest font-semibold mb-1">Layanan WhatsApp 24/7</h4>
+                <p class="text-[11px] text-nara-gray font-light">Konsultasi ukuran &amp; pemesanan langsung</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section id="catalog" class="max-w-7xl mx-auto px-6 lg:px-12 py-20">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <span class="text-xs uppercase tracking-superwide text-nara-gold font-medium">KATALOG PILIHAN</span>
+            <h2 class="font-serif-luxury text-3xl md:text-5xl font-normal text-nara-charcoal mt-2 mb-4">Koleksi Busana &amp; Hijab</h2>
+            <div class="w-12 h-0.5 bg-nara-gold mx-auto mb-8"></div>
+
+            <!-- Filter Categories & Sort -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-nara-sand pb-6">
+                <!-- Category Buttons -->
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 text-xs uppercase tracking-widest font-medium">
+                    <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 text-nara-charcoal border-b-2 border-nara-gold transition-all" data-cat="all">Semua Produk</button>
+                    <button onclick="filterCategory('hijab')" class="cat-btn px-4 py-2 text-nara-gray hover:text-nara-charcoal border-b-2 border-transparent transition-all font-semibold text-nara-gold" data-cat="hijab">Hijab &amp; Modest</button>
+                    <button onclick="filterCategory('dresses')" class="cat-btn px-4 py-2 text-nara-gray hover:text-nara-charcoal border-b-2 border-transparent transition-all" data-cat="dresses">Gaun &amp; Dress</button>
+                    <button onclick="filterCategory('tailored')" class="cat-btn px-4 py-2 text-nara-gray hover:text-nara-charcoal border-b-2 border-transparent transition-all" data-cat="tailored">Tailored</button>
+                    <button onclick="filterCategory('accessories')" class="cat-btn px-4 py-2 text-nara-gray hover:text-nara-charcoal border-b-2 border-transparent transition-all" data-cat="accessories">Aksesoris</button>
+                </div>
+
+                <!-- Sort Dropdown -->
+                <div class="flex items-center space-x-3 text-xs tracking-wider">
+                    <span class="text-nara-gray uppercase font-light">Urutkan:</span>
+                    <select id="sort-select" onchange="sortProducts()" class="bg-transparent border border-nara-sand px-3 py-1.5 focus:outline-none text-nara-charcoal font-medium cursor-pointer">
+                        <option value="featured">Pilihan Utama</option>
+                        <option value="low-high">Harga: Rendah ke Tinggi</option>
+                        <option value="high-low">Harga: Tinggi ke Rendah</option>
+                        <option value="name">Nama: A - Z</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catalog Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Dynamic Product items -->
+        </div>
+    </section>
+
+    <!-- Lookbook Editorial Banner -->
+    <section id="lookbook" class="bg-nara-beige py-20 my-10 border-y border-nara-sand">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs uppercase tracking-superwide text-nara-gold font-medium">EDITORIAL LOOKBOOK</span>
+                    <h2 class="font-serif-luxury text-4xl lg:text-5xl font-normal leading-tight">Elegansi Modest Yang Menawan</h2>
+                    <p class="text-nara-gray text-xs md:text-sm leading-relaxed font-light">
+                        "Kecantikan sejati terpancar dari kenyamanan dan kesantunan." Koleksi NARA Hijab &amp; Modest Wear menghadirkan kombinasi bahan premium yang jatuh dengan indah, sejuk dipakai, serta memancarkan aura eksklusif.
+                    </p>
+                    <div class="pt-4 flex flex-col gap-3">
+                        <a href="#catalog" onclick="filterCategory('hijab')" class="inline-block border-b-2 border-nara-charcoal pb-1 text-xs uppercase tracking-widest font-semibold hover:text-nara-gold hover:border-nara-gold transition-colors">
+                            Lihat Koleksi Hijab Lengkap <i class="fa-solid fa-arrow-right-long ml-2"></i>
+                        </a>
+                        <a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20ingin%20konsultasi%20mengenai%20produk%20Modest%20Wear." target="_blank" class="text-xs text-emerald-700 font-medium flex items-center gap-2 hover:underline">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Pesan via WhatsApp CS (+62 838-4085-2186)
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+                    <div class="zoom-img-container h-80 md:h-[420px]">
+                        <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800&auto=format&fit=crop" alt="Indonesian Luxury Hijab Fashion" class="w-full h-full object-cover">
+                    </div>
+                    <div class="zoom-img-container h-80 md:h-[420px] mt-8">
+                        <img src="https://images.unsplash.com/photo-1584589167171-541ce45f1eea?q=80&w=800&auto=format&fit=crop" alt="Silk Abaya NARA Fashion" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Legacy / About Section -->
+    <section id="about" class="max-w-5xl mx-auto px-6 py-16 text-center">
+        <div class="mb-4">
+            <svg class="w-10 h-8 text-nara-gold mx-auto" viewBox="0 0 100 60" fill="currentColor">
+                <path d="M 15 45 C 20 15, 60 10, 85 20" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                <text x="50" y="42" font-family="'Cormorant Garamond', serif" font-size="34" font-weight="600" text-anchor="middle">N</text>
+            </svg>
+        </div>
+        <h2 class="font-serif-luxury text-3xl md:text-4xl italic mb-6">Filosfi NARA FASHION</h2>
+        <p class="text-nara-gray text-xs md:text-sm font-light leading-relaxed max-w-2xl mx-auto mb-6">
+            Berdiri dengan prinsip bahwa kemewahan sejati terletak pada detail yang sempurna dan kenyamanan berbusana. NARA FASHION menciptakan pakaian wanita dan hijab eksklusif yang memadukan tren internasional dengan sentuhan khas wanita Indonesia.
+        </p>
+        <a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20tertarik%20dengan%20brand%20Anda." target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 text-xs uppercase tracking-widest font-medium hover:bg-emerald-700 transition-colors">
+            <i class="fa-brands fa-whatsapp text-base"></i> Hubungi Tim Kami (+62 838-4085-2186)
+        </a>
+    </section>
+
+    <!-- WhatsApp Quick Order Banner -->
+    <section class="bg-nara-charcoal text-nara-cream py-16 px-6 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <span class="text-xs uppercase tracking-superwide text-nara-gold font-medium">PEMESANAN CEPAT &amp; MUDAH</span>
+            <h3 class="font-serif-luxury text-3xl md:text-4xl mt-2 mb-4">Ingin Pesan Langsung via WhatsApp?</h3>
+            <p class="text-nara-sand/80 text-xs font-light mb-8 max-w-md mx-auto">
+                Tim Customer Care kami siap membantu Anda memilih ukuran, warna, hingga proses pembayaran secara langsung.
+            </p>
+            <a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20ingin%20memesan%20produk%20secara%20langsung." 
+               target="_blank" 
+               class="inline-flex items-center gap-3 bg-emerald-600 text-white font-medium text-xs uppercase tracking-widest px-8 py-4 hover:bg-emerald-500 transition-colors shadow-lg">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Chat Admin WhatsApp (+62 838-4085-2186)
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-nara-cream border-t border-nara-sand pt-16 pb-8 px-6 lg:px-12 text-nara-charcoal">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+            
+            <!-- Column 1: Brand Info -->
+            <div class="lg:col-span-2 space-y-4">
+                <div class="flex items-center space-x-2">
+                    <span class="font-serif-luxury text-2xl tracking-widest uppercase">NARA</span>
+                    <span class="text-[9px] uppercase tracking-widest text-nara-gold">FASHION</span>
+                </div>
+                <p class="text-nara-gray text-xs font-light leading-relaxed max-w-sm">
+                    Brand fashion wanita modern &amp; busana hijab eksklusif Indonesia. Menghadirkan kualitas terbaik untuk momen istimewa Anda.
+                </p>
+                <!-- WhatsApp Highlight Contact -->
+                <div class="pt-2">
+                    <a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20tertarik%20dengan%20produk%20Anda." target="_blank" class="inline-flex items-center gap-2 text-xs text-emerald-700 font-semibold bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-none hover:bg-emerald-100 transition-colors">
+                        <i class="fa-brands fa-whatsapp text-base"></i> WA: +62 838-4085-2186
+                    </a>
+                </div>
+                <div class="flex space-x-4 pt-2 text-nara-charcoal">
+                    <a href="#" class="hover:text-nara-gold transition-colors text-base" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-nara-gold transition-colors text-base" title="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+                    <a href="#" class="hover:text-nara-gold transition-colors text-base" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- Column 2: Layanan Pelanggan -->
+            <div>
+                <h5 class="text-xs uppercase tracking-widest font-semibold mb-4 text-nara-charcoal">Layanan Pelanggan</h5>
+                <ul class="space-y-2.5 text-xs text-nara-gray font-light">
+                    <li><a href="https://wa.me/6283840852186?text=Halo%20NARA%20FASHION,%20saya%20butuh%20bantuan." target="_blank" class="hover:text-nara-gold transition-colors text-emerald-700"><i class="fa-brands fa-whatsapp"></i> Chat CS WhatsApp</a></li>
+                    <li><a href="#" class="hover:text-nara-gold transition-colors">Informasi Pengiriman</a></li>
+                    <li><a href="#" class="hover:text-nara-gold transition-colors">Kebijakan Pengembalian</a></li>
+                    <li><a href="#" class="hover:text-nara-gold transition-colors">Panduan Ukuran (Size Chart)</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Kategori Produk -->
+            <div>
+                <h5 class="text-xs uppercase tracking-widest font-semibold mb-4 text-nara-charcoal">Koleksi</h5>
+                <ul class="space-y-2.5 text-xs text-nara-gray font-light">
+                    <li><a href="#catalog" onclick="filterCategory('hijab')" class="hover:text-nara-gold transition-colors">Hijab &amp; Scarf Premium</a></li>
+                    <li><a href="#catalog" onclick="filterCategory('hijab')" class="hover:text-nara-gold transition-colors">Abaya &amp; Gamis Luxury</a></li>
+                    <li><a href="#catalog" onclick="filterCategory('dresses')" class="hover:text-nara-gold transition-colors">Gaun Pesta &amp; Dress</a></li>
+                    <li><a href="#catalog" onclick="filterCategory('tailored')" class="hover:text-nara-gold transition-colors">Setelan Tailored</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Kontak Admin -->
+            <div>
+                <h5 class="text-xs uppercase tracking-widest font-semibold mb-4 text-nara-charcoal">Butik &amp; Kontak</h5>
+                <p class="text-xs text-nara-gray font-light leading-relaxed mb-3">
+                    Jakarta / Bandung, Indonesia<br>
+                    Jam Operasional CS:<br>
+                    Senin - Sabtu: 08.00 - 20.00 WIB
+                </p>
+                <p class="text-xs font-medium text-emerald-700 flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp"></i> +62 838-4085-2186
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-nara-sand/60 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] text-nara-gray uppercase tracking-widest font-light gap-4">
+            <p>&copy; 2026 NARA FASHION INDONESIA. HAK CIPTA DILINDUNGI.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-nara-gold">Syarat &amp; Ketentuan</a>
+                <a href="#" class="hover:text-nara-gold">Kebijakan Privasi</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Drawer -->
+    <div id="cart-drawer-overlay" onclick="toggleCartDrawer()" class="fixed inset-0 z-50 drawer-overlay hidden transition-opacity duration-300"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[420px] bg-nara-cream shadow-2xl translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
+        <div class="p-6 border-b border-nara-sand flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-bag-shopping text-nara-gold"></i>
+                <h3 class="font-serif-luxury text-2xl uppercase tracking-wider">Keranjang (<span id="cart-drawer-count">0</span>)</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="text-nara-charcoal hover:text-nara-gold text-xl p-2">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-6 divide-y divide-nara-sand/50 no-scrollbar"></div>
+
+        <div class="p-6 border-t border-nara-sand bg-nara-beige/50 space-y-4">
+            <div class="flex justify-between items-center text-xs tracking-widest uppercase">
+                <span class="text-nara-gray">Subtotal</span>
+                <span id="cart-subtotal" class="font-serif-luxury text-2xl text-nara-charcoal font-semibold">Rp 0</span>
+            </div>
+            <p class="text-[10px] text-nara-gray font-light italic">Bisa langsung checkout via WhatsApp Customer Service.</p>
+            
+            <button onclick="checkoutViaWhatsApp()" class="w-full bg-emerald-600 text-white py-4 uppercase text-xs tracking-superwide font-medium hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick View Product Modal -->
+    <div id="quickview-modal" class="fixed inset-0 z-50 drawer-overlay hidden flex items-center justify-center p-4">
+        <div class="bg-nara-cream max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col md:flex-row border border-nara-sand">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 text-xl text-nara-charcoal hover:text-nara-gold bg-nara-cream/80 w-8 h-8 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-full md:w-1/2 h-80 md:h-auto">
+                <img id="qv-image" src="" alt="Product Quick View" class="w-full h-full object-cover">
+            </div>
+            <div class="w-full md:w-1/2 p-8 flex flex-col justify-between">
+                <div>
+                    <span id="qv-category" class="text-[10px] uppercase tracking-superwide text-nara-gold font-medium block mb-2">KATEGORI</span>
+                    <h3 id="qv-title" class="font-serif-luxury text-3xl text-nara-charcoal mb-2">Nama Produk</h3>
+                    <p id="qv-price" class="font-serif-luxury text-2xl text-nara-gold mb-6">Rp 0</p>
+                    <p id="qv-description" class="text-xs text-nara-gray font-light leading-relaxed mb-6">
+                        Deskripsi produk...
+                    </p>
+
+                    <div class="mb-6">
+                        <label class="block text-[10px] uppercase tracking-widest text-nara-charcoal font-semibold mb-2">Pilih Ukuran</label>
+                        <div class="flex space-x-2" id="qv-sizes">
+                            <button class="size-btn border border-nara-sand px-3 py-1.5 text-xs hover:border-nara-gold active" onclick="selectSize(this)">S</button>
+                            <button class="size-btn border border-nara-sand px-3 py-1.5 text-xs hover:border-nara-gold" onclick="selectSize(this)">M</button>
+                            <button class="size-btn border border-nara-sand px-3 py-1.5 text-xs hover:border-nara-gold" onclick="selectSize(this)">L</button>
+                            <button class="size-btn border border-nara-sand px-3 py-1.5 text-xs hover:border-nara-gold" onclick="selectSize(this)">XL</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-4">
+                    <button id="qv-add-btn" onclick="" class="w-full bg-nara-charcoal text-nara-cream py-3.5 text-xs uppercase tracking-widest font-medium hover:bg-nara-gold transition-colors">
+                        Tambah ke Keranjang
+                    </button>
+                    <button id="qv-wa-btn" onclick="" class="w-full bg-emerald-600 text-white py-3 text-xs uppercase tracking-widest font-medium hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Tanya Admin via WA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Sample Products Including Indonesian Hijab & Modest Wear
+        const products = [
+            {
+                id: 101,
+                name: "Voal Premium Silk Hijab",
+                category: "hijab",
+                priceIDR: 249000,
+                image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800&auto=format&fit=crop",
+                badge: "Terlaris",
+                description: "Hijab voal segi empat bermaterial silk premium yang lembut, tegak di dahi, serta memancarkan kilau eksklusif."
+            },
+            {
+                id: 102,
+                name: "Luxury Pleated Silk Abaya",
+                category: "hijab",
+                priceIDR: 789000,
+                image: "https://images.unsplash.com/photo-1584589167171-541ce45f1eea?q=80&w=800&auto=format&fit=crop",
+                badge: "Baru",
+                description: "Abaya modest bergaya Timur Tengah dengan aksen plisket sutra halus dan potongan longgar yang anggun."
+            },
+            {
+                id: 103,
+                name: "Pashmina Instan Crepe Silk",
+                category: "hijab",
+                priceIDR: 189000,
+                image: "https://images.unsplash.com/photo-1585728748176-455ac5eed962?q=80&w=800&auto=format&fit=crop",
+                badge: "Favorit",
+                description: "Pashmina praktis berbahan silk crepe premium yang adem, nyaman dipakai seharian tanpa mudah kusut."
+            },
+            {
+                id: 104,
+                name: "Embroided Outer Modest Dress",
+                category: "hijab",
+                priceIDR: 650000,
+                image: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=800&auto=format&fit=crop",
+                badge: "Terbatas",
+                description: "Outer panjang dengan detail bordir emas eksklusif pada bagian lengan, cocok untuk acara formal & lebaran."
+            },
+            {
+                id: 1,
+                name: "Tailored Wool Jumpsuit",
+                category: "tailored",
+                priceIDR: 1250000,
+                image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop",
+                badge: "Eksklusif",
+                description: "Jumpsuit wool pilihan dengan potongan double-breasted presisi khas penjahit profesional."
+            },
+            {
+                id: 2,
+                name: "Oversized Linen Shirt",
+                category: "shirts",
+                priceIDR: 480000,
+                image: "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?q=80&w=800&auto=format&fit=crop",
+                badge: "Baru",
+                description: "Kemeja linen murni bergaya santai namun tetap elegan dengan kancing kerang mutiara asli."
+            },
+            {
+                id: 3,
+                name: "Floral Silk Maxi Dress",
+                category: "dresses",
+                priceIDR: 1450000,
+                image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=800&auto=format&fit=crop",
+                badge: "Koleksi Khusus",
+                description: "Gaun panjang bermotif botani buatan tangan di atas kain sutra crepe de chine murni."
+            },
+            {
+                id: 4,
+                name: "Sculptural Tailored Blazer",
+                category: "tailored",
+                priceIDR: 1100000,
+                image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop",
+                badge: "",
+                description: "Blazer terstruktur dengan aksen pinggang tegas dan kancing berukir logo emas NARA."
+            }
+        ];
+
+        // Global State Variables
+        let cart = [];
+        let wishlist = [];
+        let currentCurrency = 'IDR';
+        let currencyRates = { IDR: 1, USD: 0.000063, EUR: 0.000058 };
+        let currencySymbols = { IDR: 'Rp ', USD: '$', EUR: '€' };
+        let activeCategory = 'all';
+
+        // Render Product Cards
+        function renderProducts(listToRender = products) {
+            const container = document.getElementById('product-grid');
+            container.innerHTML = '';
+
+            if (listToRender.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-nara-gray font-light">Tidak ada produk dalam kategori ini.</div>`;
+                return;
+            }
+
+            listToRender.forEach(product => {
+                const isWishlisted = wishlist.includes(product.id);
+                let formattedPrice = '';
+
+                if (currentCurrency === 'IDR') {
+                    formattedPrice = `${currencySymbols.IDR}${product.priceIDR.toLocaleString('id-ID')}`;
+                } else {
+                    const converted = (product.priceIDR * currencyRates[currentCurrency]).toFixed(2);
+                    formattedPrice = `${currencySymbols[currentCurrency]}${converted}`;
+                }
+
+                const cardHTML = `
+                    <div class="product-card group flex flex-col justify-between">
+                        <div>
+                            <div class="zoom-img-container relative aspect-[3/4] bg-nara-beige mb-4 overflow-hidden">
+                                ${product.badge ? `<span class="absolute top-3 left-3 z-10 bg-nara-charcoal text-nara-cream text-[9px] uppercase tracking-widest px-2.5 py-1 font-medium">${product.badge}</span>` : ''}
+                                
+                                <button onclick="toggleWishlist(${product.id})" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-nara-cream/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors" title="Favorit">
+                                    <i class="${isWishlisted ? 'fa-solid text-red-700' : 'fa-regular text-nara-charcoal'} fa-heart text-xs"></i>
+                                </button>
+
+                                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover object-top">
+                                
+                                <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-nara-charcoal/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-2">
+                                    <button onclick="openQuickView(${product.id})" class="flex-1 bg-nara-cream text-nara-charcoal text-[10px] uppercase tracking-widest py-2.5 font-semibold hover:bg-nara-gold hover:text-white transition-colors">
+                                        Detail Produk
+                                    </button>
+                                    <button onclick="addToCart(${product.id})" class="bg-nara-charcoal text-white px-3 py-2.5 hover:bg-nara-gold transition-colors" title="Tambah ke Keranjang">
+                                        <i class="fa-solid fa-plus text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <span class="text-[10px] uppercase tracking-superwide text-nara-gold font-medium">${product.category === 'hijab' ? 'Hijab & Modest' : product.category}</span>
+                            <h3 class="font-serif-luxury text-xl text-nara-charcoal font-normal group-hover:text-nara-gold transition-colors mt-0.5">${product.name}</h3>
+                        </div>
+                        <div class="mt-2 pt-2 border-t border-nara-sand/40 flex justify-between items-center">
+                            <p class="text-sm font-serif-luxury text-nara-charcoal font-semibold">${formattedPrice}</p>
+                            <button onclick="addToCart(${product.id})" class="text-[10px] uppercase tracking-widest text-nara-gold hover:underline font-medium">+ Beli</button>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            });
+        }
+
+        // Category Filter
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.classList.add('text-nara-charcoal', 'border-nara-gold');
+                    btn.classList.remove('text-nara-gray', 'border-transparent');
+                } else {
+                    btn.classList.remove('text-nara-charcoal', 'border-nara-gold');
+                    btn.classList.add('text-nara-gray', 'border-transparent');
+                }
+            });
+
+            if (cat === 'all') {
+                renderProducts(products);
+            } else {
+                renderProducts(products.filter(p => p.category === cat));
+            }
+        }
+
+        // Sort Products
+        function sortProducts() {
+            const val = document.getElementById('sort-select').value;
+            let currentList = activeCategory === 'all' ? [...products] : products.filter(p => p.category === activeCategory);
+
+            if (val === 'low-high') {
+                currentList.sort((a, b) => a.priceIDR - b.priceIDR);
+            } else if (val === 'high-low') {
+                currentList.sort((a, b) => b.priceIDR - a.priceIDR);
+            } else if (val === 'name') {
+                currentList.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            renderProducts(currentList);
+        }
+
+        // Add To Cart
+        function addToCart(productId, selectedSize = 'S') {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId && item.size === selectedSize);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, size: selectedSize, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`${product.name} masuk keranjang`);
+            openCartDrawer();
+        }
+
+        function updateQuantity(id, size, delta) {
+            const item = cart.find(i => i.id === id && i.size === size);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => !(i.id === id && i.size === size));
+                }
+            }
+            updateCartUI();
+        }
+
+        // Update Cart Drawer UI
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            document.getElementById('cart-count').innerText = totalCount;
+            document.getElementById('cart-drawer-count').innerText = totalCount;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-nara-gray">
+                        <i class="fa-solid fa-bag-shopping text-3xl mb-3 text-nara-sand"></i>
+                        <p class="text-xs uppercase tracking-widest font-light">Keranjang Anda masih kosong</p>
+                    </div>
+                `;
+                document.getElementById('cart-subtotal').innerText = `${currencySymbols[currentCurrency]}0`;
+                return;
+            }
+
+            let subtotalIDR = 0;
+            container.innerHTML = '';
+
+            cart.forEach(item => {
+                subtotalIDR += item.priceIDR * item.quantity;
+
+                let itemPriceFormatted = '';
+                if (currentCurrency === 'IDR') {
+                    itemPriceFormatted = `Rp ${(item.priceIDR * item.quantity).toLocaleString('id-ID')}`;
+                } else {
+                    itemPriceFormatted = `${currencySymbols[currentCurrency]}${((item.priceIDR * item.quantity) * currencyRates[currentCurrency]).toFixed(2)}`;
+                }
+
+                container.innerHTML += `
+                    <div class="flex gap-4 pt-4 first:pt-0">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover bg-nara-beige">
+                        <div class="flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-serif-luxury text-base text-nara-charcoal leading-tight">${item.name}</h4>
+                                    <button onclick="updateQuantity(${item.id}, '${item.size}', -${item.quantity})" class="text-nara-gray hover:text-red-700 text-xs">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                                <p class="text-[10px] uppercase text-nara-gold tracking-widest mt-0.5">Ukuran: ${item.size}</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="flex items-center border border-nara-sand px-2 py-0.5 text-xs">
+                                    <button onclick="updateQuantity(${item.id}, '${item.size}', -1)" class="px-1 text-nara-gray hover:text-nara-charcoal">-</button>
+                                    <span class="px-2 font-medium">${item.quantity}</span>
+                                    <button onclick="updateQuantity(${item.id}, '${item.size}', 1)" class="px-1 text-nara-gray hover:text-nara-charcoal">+</button>
+                                </div>
+                                <span class="font-serif-luxury text-base font-semibold text-nara-charcoal">
+                                    ${itemPriceFormatted}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (currentCurrency === 'IDR') {
+                document.getElementById('cart-subtotal').innerText = `Rp ${subtotalIDR.toLocaleString('id-ID')}`;
+            } else {
+                document.getElementById('cart-subtotal').innerText = `${currencySymbols[currentCurrency]}${(subtotalIDR * currencyRates[currentCurrency]).toFixed(2)}`;
+            }
+        }
+
+        // Checkout via WhatsApp
+        function checkoutViaWhatsApp() {
+            if (cart.length === 0) {
+                showToast("Keranjang Anda masih kosong");
+                return;
+            }
+
+            let message = "Halo NARA FASHION, saya mau memesan produk berikut:%0A%0A";
+            let totalIDR = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.priceIDR * item.quantity;
+                totalIDR += itemTotal;
+                message += `${index + 1}. *${item.name}* (Ukuran: ${item.size}) - ${item.quantity} pcs - Rp ${itemTotal.toLocaleString('id-ID')}%0A`;
+            });
+
+            message += `%0A*Total Estimasi:* Rp ${totalIDR.toLocaleString('id-ID')}`;
+            message += "%0A%0AMohon info ketersediaan stok & petunjuk pembayarannya. Terima kasih!";
+
+            window.open(`https://wa.me/6283840852186?text=${message}`, '_blank');
+        }
+
+        function toggleCartDrawer() {
+            document.getElementById('cart-drawer').classList.toggle('translate-x-full');
+            document.getElementById('cart-drawer-overlay').classList.toggle('hidden');
+        }
+
+        function openCartDrawer() {
+            document.getElementById('cart-drawer').classList.remove('translate-x-full');
+            document.getElementById('cart-drawer-overlay').classList.remove('hidden');
+        }
+
+        // Wishlist System
+        function toggleWishlist(productId) {
+            const index = wishlist.indexOf(productId);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showToast("Produk dihapus dari favorit");
+            } else {
+                wishlist.push(productId);
+                showToast("Produk disimpan ke favorit");
+            }
+
+            const badge = document.getElementById('wishlist-count');
+            badge.innerText = wishlist.length;
+            if (wishlist.length > 0) {
+                badge.classList.remove('opacity-0', 'scale-75');
+            } else {
+                badge.classList.add('opacity-0', 'scale-75');
+            }
+
+            renderProducts(activeCategory === 'all' ? products : products.filter(p => p.category === activeCategory));
+        }
+
+        function openWishlistDrawer() {
+            if (wishlist.length === 0) {
+                showToast("Daftar favorit Anda masih kosong");
+                return;
+            }
+            const wishlistItems = products.filter(p => wishlist.includes(p.id));
+            renderProducts(wishlistItems);
+            showToast(`Menampilkan ${wishlist.length} produk favorit`);
+        }
+
+        // Quick View Modal
+        function openQuickView(id) {
+            const product = products.find(p => p.id === id);
+            document.getElementById('qv-image').src = product.image;
+            document.getElementById('qv-title').innerText = product.name;
+            document.getElementById('qv-category').innerText = product.category === 'hijab' ? 'Hijab & Modest' : product.category;
+            document.getElementById('qv-description').innerText = product.description;
+
+            if (currentCurrency === 'IDR') {
+                document.getElementById('qv-price').innerText = `Rp ${product.priceIDR.toLocaleString('id-ID')}`;
+            } else {
+                document.getElementById('qv-price').innerText = `${currencySymbols[currentCurrency]}${(product.priceIDR * currencyRates[currentCurrency]).toFixed(2)}`;
+            }
+
+            const addBtn = document.getElementById('qv-add-btn');
+            addBtn.onclick = function() {
+                const activeSizeBtn = document.querySelector('#qv-sizes .active');
+                const selectedSize = activeSizeBtn ? activeSizeBtn.innerText : 'S';
+                addToCart(product.id, selectedSize);
+                closeQuickView();
+            };
+
+            const waBtn = document.getElementById('qv-wa-btn');
+            waBtn.onclick = function() {
+                const activeSizeBtn = document.querySelector('#qv-sizes .active');
+                const selectedSize = activeSizeBtn ? activeSizeBtn.innerText : 'S';
+                const text = `Halo NARA FASHION, saya mau tanya stok *${product.name}* (Ukuran: ${selectedSize}) - Rp ${product.priceIDR.toLocaleString('id-ID')}`;
+                window.open(`https://wa.me/6283840852186?text=${encodeURIComponent(text)}`, '_blank');
+            };
+
+            document.getElementById('quickview-modal').classList.remove('hidden');
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickview-modal').classList.add('hidden');
+        }
+
+        function selectSize(btn) {
+            document.querySelectorAll('#qv-sizes .size-btn').forEach(b => b.classList.remove('active', 'border-nara-gold', 'bg-nara-sand/30'));
+            btn.classList.add('active', 'border-nara-gold', 'bg-nara-sand/30');
+        }
+
+        // Search System
+        function toggleSearchModal() {
+            const modal = document.getElementById('search-modal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            } else {
+                modal.classList.add('opacity-0');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+
+            if (query.trim() === '') return;
+
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query) || p.description.toLowerCase().includes(query));
+
+            filtered.forEach(product => {
+                resultsContainer.innerHTML += `
+                    <div onclick="openQuickView(${product.id}); toggleSearchModal();" class="cursor-pointer group">
+                        <img src="${product.image}" class="w-full h-36 object-cover mb-2">
+                        <p class="font-serif-luxury text-sm group-hover:text-nara-gold">${product.name}</p>
+                        <p class="text-xs text-nara-gold font-semibold">Rp ${product.priceIDR.toLocaleString('id-ID')}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('translate-x-full');
+        }
+
+        document.getElementById('currency-select').addEventListener('change', function(e) {
+            currentCurrency = e.target.value;
+            renderProducts(products);
+            updateCartUI();
+            showToast(`Mata uang diubah ke ${currentCurrency}`);
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        window.onload = function() {
+            renderProducts(products);
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
